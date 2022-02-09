@@ -21,7 +21,7 @@ sources:
            # error_after: {count: 6, period: hour}
 
 models:
-    # Need to populate this bit!
+    # Need add fhv column info here!
     #- name: fhv_tripdata
       #description:: >
         #FHV trip data
