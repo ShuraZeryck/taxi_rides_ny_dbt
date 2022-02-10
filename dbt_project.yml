@@ -19,9 +19,9 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-target-path: "dbt_zeryck_models"  # directory which will store compiled SQL files
+target-path: "target"  # directory which will store compiled SQL files # dbt_szeryck_models
 clean-targets:         # directories to be removed by `dbt clean`
-  - "dbt_zeryck_models"
+  - "target"
   - "dbt_packages"
 
 
