@@ -9,6 +9,7 @@ with tripdata as
 )
 select
    -- identifiers
+   -- First one uses macro surrogate_key from dbt_utls package to create unique ID for each trip
     {{ dbt_utils.surrogate_key(['vendorid', 'tpep_pickup_datetime']) }} as tripid,
     cast(vendorid as integer) as vendorid,
     cast(ratecodeid as integer) as ratecodeid,
@@ -41,7 +42,8 @@ select
 from tripdata
 where rn = 1
 
--- dbt build --m <model.sql> --var 'is_test_run: false'
+-- Run CLI command below to build with all data, instead of test build with only 100 rows
+-- dbt build --m stg_yellow_tripdata.sql --var 'is_test_run: false'
 {% if var('is_test_run', default=true) %}
 
   limit 100
