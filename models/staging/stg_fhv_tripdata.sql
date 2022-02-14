@@ -1,7 +1,8 @@
 {{ config(materialized='view') }}
 
 -- Copied from stg_yellow_tripdata
--- Updated source line, columns to select, used dispatching_base_num instead of vendorid
+-- Updated source line, columns to select
+-- Used dispatching_base_num instead of vendorid. The bit with rn should still ensure uniqueness
  
 with tripdata as 
 (
