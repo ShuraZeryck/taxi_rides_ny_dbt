@@ -41,6 +41,7 @@ select
     cast(congestion_surcharge as numeric) as congestion_surcharge
 from tripdata
 where rn = 1
+-- Given how rn was defined above, this removes duplicates
 
 -- Run CLI command below to build with all data, instead of test build with only 100 rows
 -- dbt build --m stg_yellow_tripdata.sql --var 'is_test_run: false'

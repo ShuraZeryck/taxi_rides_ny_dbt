@@ -1,6 +1,6 @@
 {{ config(materialized='table') }}
 
--- Haven't looked at this yet
+-- Note: don't have this data in BQ yet
 
 with trips_data as (
     select * from {{ ref('fact_trips') }}
