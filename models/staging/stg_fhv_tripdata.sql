@@ -1,13 +1,14 @@
 {{ config(materialized='view') }}
 
 -- Copied from stg_yellow_tripdata
--- Updated source line, columns to select, used dispatching_base_num instead of vendorid
+-- Updated source line, columns to select
+-- Used dispatching_base_num instead of vendorid. The bit with rn should still ensure uniqueness
  
 with tripdata as 
 (
   select *,
     row_number() over(partition by dispatching_base_num, pickup_datetime) as rn
-  from {{ source('staging','fhv_tripdata_non_partitioned') }}
+  from {{ source('staging','fhv_tripdata_partitioned_clustered') }}
   where dispatching_base_num is not null 
 )
 -- Note: source macro above gets correct schema and all dependencies. 'staging' is name from schema.yml

@@ -1,7 +1,7 @@
 {{ config(materialized='view') }}
  
 -- Mostly copied over from stg_yellow_tripdata.sql
--- Changed source line, trip_type line, tpep to lpep
+-- Changed source line, trip_type line, tpep to lpep, added ehail fee
 
 with tripdata as 
 (
@@ -36,7 +36,7 @@ select
     cast(mta_tax as numeric) as mta_tax,
     cast(tip_amount as numeric) as tip_amount,
     cast(tolls_amount as numeric) as tolls_amount,
-    0 as ehail_fee,
+    cast(ehail_fee as numeric) as ehail_fee,
     cast(improvement_surcharge as numeric) as improvement_surcharge,
     cast(total_amount as numeric) as total_amount,
     cast(payment_type as integer) as payment_type,
