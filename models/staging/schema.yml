@@ -16,7 +16,7 @@ sources:
       tables:
         - name: green_tripdata_partitioned_clustered
         - name: yellow_tripdata_partitioned_clustered
-        - name: fhv_tripdata_non_partitioned
+        - name: fhv_tripdata_partitioned_clustered
          # freshness:
            # error_after: {count: 6, period: hour}
 
