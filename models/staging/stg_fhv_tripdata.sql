@@ -8,7 +8,7 @@ with tripdata as
 (
   select *,
     row_number() over(partition by dispatching_base_num, pickup_datetime) as rn
-  from {{ source('staging','fhv_tripdata_non_partitioned') }}
+  from {{ source('staging','fhv_tripdata_partitioned_clustered') }}
   where dispatching_base_num is not null 
 )
 -- Note: source macro above gets correct schema and all dependencies. 'staging' is name from schema.yml
