@@ -2,8 +2,9 @@
  
 with tripdata as 
 (
-  select *,
-    row_number() over(partition by vendorid, tpep_pickup_datetime) as rn
+  -- select *,
+  --   row_number() over(partition by tpep_pickup_datetime, pulocationid) as rn
+  select *
   from {{ source('staging','yellow_tripdata_partitioned_clustered') }}
   where vendorid is not null 
 )
@@ -40,7 +41,7 @@ select
     {{ get_payment_type_description('payment_type') }} as payment_type_description, 
     cast(congestion_surcharge as numeric) as congestion_surcharge
 from tripdata
-where rn = 1
+-- where rn = 1
 -- Given how rn was defined above, this removes duplicates
 
 -- Run CLI command below to build with all data, instead of test build with only 100 rows

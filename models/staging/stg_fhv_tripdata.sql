@@ -6,8 +6,9 @@
  
 with tripdata as 
 (
-  select *,
-    row_number() over(partition by dispatching_base_num, pickup_datetime) as rn
+  -- select *,
+  --   row_number() over(partition by dispatching_base_num, pickup_datetime) as rn
+  select *
   from {{ source('staging','fhv_tripdata_partitioned_clustered') }}
   where dispatching_base_num is not null 
 )
@@ -29,7 +30,7 @@ select
     -- fhv's are always pre-arranged service
     2 as trip_type,
 from tripdata
-where rn = 1
+-- where rn = 1
 
 -- dbt build --m <model.sql> --var 'is_test_run: false'
 {% if var('is_test_run', default=true) %}
